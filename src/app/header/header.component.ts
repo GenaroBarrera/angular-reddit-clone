@@ -8,7 +8,19 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+/**
+ * from part 17
+ * The next task is to implement Logout in our Angular application, 
+ * implementing Logout on the frontend is a simple task, 
+ * we just have to delete the stored Auth and Refresh Tokens from the Local Storage.
+ * 
+ * After that, we will make an API call to the backend to delete the Refresh Tokens 
+ * so that it wont be possible to rotate the JWT’s.
+ * 
+ * We already have the HTML code ready in our header.component.html file, 
+ * we just have to implement the logic inside the header.component.ts file
+ */
+ export class HeaderComponent implements OnInit {
   faUser = faUser;
   isLoggedIn!: boolean;
   username!: string;
@@ -26,6 +38,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/user-profile/' + this.username);
   }
 
+  /**
+   * The logout() method inside the header.component.ts is calling the logout() method inside the AuthService.
+   */
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;

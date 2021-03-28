@@ -13,6 +13,7 @@
         <a class="postname" href="{{post.url}}">{{post.postName}}</a>
       </div>
       <div>
+        <!-- we have to use the innerHtml directive to display the HTML code as normal text. -->
         <p class="post-text" [innerHtml]="post.description"></p>
       </div>
       <hr />
@@ -21,6 +22,8 @@
           <fa-icon [icon]="faComments"></fa-icon>
           Comments({{post.commentCount}})
         </a>
+        <!-- So if you observe in the post-tile.component.html file, 
+          we added a click directive and calling the method goToPost() with input as post.id -->
         <button class="login" (click)="goToPost(post.id)">
           Read Post
         </button>

@@ -60,6 +60,15 @@ export class AuthService {
       }));
   }
 
+  /**
+   * The logout() method inside the header.component.ts is calling the logout() method inside the AuthService.
+   * 
+   * Inside this method, we are making a POST call to our backend, this call returns a String as response, 
+   * which we are just logging to the console.
+   * 
+   * Then, we are clearing all the details which are stored in the local storage 
+   * like the username, authentication token, refresh token and expiration time.
+   */
   logout() {
     this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
       { responseType: 'text' })

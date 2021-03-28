@@ -20,6 +20,18 @@ export class ViewPostComponent implements OnInit {
   commentPayload: CommentPayload;
   comments!: CommentPayload[];
 
+  /**
+   * Inside the ViewPostComponent, we are first injecting the PostService and ActivatedRouter classes, 
+   * and inside the constructor, we access the incoming query-param id and assign it to the postId variable.
+   * 
+   * We first declared the variable commentForm of type FormGroup and initialized it inside the constructor. 
+   * There is a FormControl assigned to the FormGroup, which is initialized to an empty value 
+   * and we have also defined a Validator, which makes sure that the given value is not empty.
+   * @param postService 
+   * @param activateRoute 
+   * @param commentService 
+   * @param router 
+   */
   constructor(private postService: PostService, private activateRoute: ActivatedRoute,
     private commentService: CommentService, private router: Router) {
     this.postId = this.activateRoute.snapshot.params.id;
@@ -27,6 +39,7 @@ export class ViewPostComponent implements OnInit {
     this.commentForm = new FormGroup({
       text: new FormControl('', Validators.required)
     });
+    //Next, we declared and initialized the CommentPayload object, we will use this when making a POST call to the Comment API.
     this.commentPayload = {
       text: '',
       postId: this.postId
@@ -38,6 +51,13 @@ export class ViewPostComponent implements OnInit {
     this.getCommentsForPost();
   }
 
+  /**
+   * We declared the method postComment(), which reads the value for FormControl variable – text from the FormGroup – commentForm. 
+   * We then assign the value to the text field of the CommentPayload object.
+   * 
+   * Then we are calling the postComment() method inside the CommentService, which returns an Observable, 
+   * so we subscribe to it and when we receive a success response we are resetting the text variable to an empty value.
+   */
   postComment() {
     this.commentPayload.text = this.commentForm.get('text')?.value;
     this.commentService.postComment(this.commentPayload).subscribe(data => {
@@ -48,6 +68,15 @@ export class ViewPostComponent implements OnInit {
     })
   }
 
+  /**
+   * After that, we are reading the post from the PostService using the postService.getPost() method,
+   * which returns an Observable<PostModel>
+   * 
+   * We subscribe to the response and assign the response, to the post variable, 
+   * if there is an error, then we throw an error using the throwError method.
+   * 
+   * We also have the method getPostById() which are reading the post information and assigning it to the post variable
+   */
   private getPostById() {
     this.postService.getPost(this.postId).subscribe(data => {
       this.post = data;
@@ -56,6 +85,12 @@ export class ViewPostComponent implements OnInit {
     });
   }
 
+  /**
+   * We are calling the method getCommentsForPost() 
+   * inside the constructor where we are calling the getAllCommentsForPost() from CommentService.
+   * 
+   * As this returns an Observable we are subscribing to it and assigning the response to the comments variable.
+   */
   private getCommentsForPost() {
     this.commentService.getAllCommentsForPost(this.postId).subscribe(data => {
       this.comments = data;

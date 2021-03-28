@@ -15,14 +15,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './token-interceptor';
 import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PostTileComponent } from './shared/post-tile/post-tile.component';
+import { PostTitleComponent } from './shared/post-title/post-title.component';
 import { VoteButtonComponent } from './shared/vote-button/vote-button.component';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { SubredditSideBarComponent } from './shared/subreddit-side-bar/subreddit-side-bar.component';
 import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
 import { CreatePostComponent } from './post/create-post/create-post.component';
 import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
-import { EditorModule } from '@tinymce/tinymce-angular';
+import { EditorModule } from '@tinymce/tinymce-angular'; //to create a Post we need some kind of editor a cool WYSIWYG Editor like TinyMCE.
 import { ViewPostComponent } from './post/view-post/view-post.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
@@ -35,7 +35,7 @@ import { UserProfileComponent } from './auth/user-profile/user-profile.component
     SignUpComponent,
     LoginComponent,
     HomeComponent,
-    PostTileComponent,
+    PostTitleComponent,
     VoteButtonComponent,
     SideBarComponent,
     SubredditSideBarComponent,
